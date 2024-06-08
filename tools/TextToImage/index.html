@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Image Converter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&family=Courier+New:wght@400;700&family=Georgia:wght@400;700&family=Tahoma:wght@400;700&family=Times+New+Roman:wght@400;700&family=Verdana:wght@400;700&display=swap');
 
+    main {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color:darkgray;
+    }
+
+    main h2 {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    #input-text {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    label {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select, input[type=range], button, input[type=color] {
+      margin-top: 5px;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #22A7F0;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #output-image {
+      margin-top: 20px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    #output-image img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .download {
+      display: block;
+      background: red;
+      color: snow;
+      margin: 16px auto;
+      padding: 8px;
+      width: 40vw;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Text to Image Converter</h2>
+    <div class="container">
+      <div class="controls">
+        <label for="input-text">Enter text:</label>
+        <textarea id="input-text" placeholder="Enter text..." aria-label="Input text area"></textarea>
+        <label for="font-style-select">Font style:</label>
+        <select id="font-style-select" aria-label="Font style select">
+          <option value="normal" style="font-family: Arial;">Arial</option>
+          <option value="italic" style="font-family: Arial; font-style: italic;">Arial Italic</option>
+          <option value="bold" style="font-family: Arial; font-weight: bold;">Arial Bold</option>
+          <option value="bold italic" style="font-family: Arial; font-weight: bold; font-style: italic;">Arial Bold Italic</option>
+          <option value="normal" style="font-family: 'Courier New';">Courier New</option>
+          <option value="italic" style="font-family: 'Courier New'; font-style: italic;">Courier New Italic</option>
+          <option value="bold" style="font-family: 'Courier New'; font-weight: bold;">Courier New Bold</option>
+          <option value="bold italic" style="font-family: 'Courier New'; font-weight: bold; font-style: italic;">Courier New Bold Italic</option>
+          <option value="normal" style="font-family: Georgia;">Georgia</option>
+          <option value="italic" style="font-family: Georgia; font-style: italic;">Georgia Italic</option>
+          <option value="bold" style="font-family: Georgia; font-weight: bold;">Georgia Bold</option>
+          <option value="bold italic" style="font-family: Georgia; font-weight: bold; font-style: italic;">Georgia Bold Italic</option>
+          <option value="normal" style="font-family: Tahoma;">Tahoma</option>
+          <option value="italic" style="font-family: Tahoma; font-style: italic;">Tahoma Italic</option>
+          <option value="bold" style="font-family: Tahoma; font-weight: bold;">Tahoma Bold</option>
+          <option value="bold italic" style="font-family: Tahoma; font-weight: bold; font-style: italic;">Tahoma Bold Italic</option>
+          <option value="normal" style="font-family: 'Times New Roman';">Times New Roman</option>
+          <option value="italic" style="font-family: 'Times New Roman'; font-style: italic;">Times New Roman Italic</option>
+          <option value="bold" style="font-family: 'Times New Roman'; font-weight: bold;">Times New Roman Bold</option>
+          <option value="bold italic" style="font-family: 'Times New Roman'; font-weight: bold; font-style: italic;">Times New Roman Bold Italic</option>
+          <option value="normal" style="font-family: Verdana;">Verdana</option>
+          <option value="italic" style="font-family: Verdana; font-style: italic;">Verdana Italic</option>
+          <option value="bold" style="font-family: Verdana; font-weight: bold;">Verdana Bold</option>
+          <option value="bold italic" style="font-family: Verdana; font-weight: bold; font-style: italic;">Verdana Bold Italic</option>
+        </select>
+        <label for="text-color-picker">Text color:</label>
+        <input type="color" id="text-color-picker" aria-label="Text color picker" value="#000000">
+        <label for="background-color-picker">Background color:</label>
+        <input type="color" id="background-color-picker" aria-label="Background color picker" value="#ffffff">
+        <label for="font-size-range">Font size:</label>
+        <input type="range" id="font-size-range" min="10" max="50" value="30" aria-label="Font size range">
+        <button id="convert-btn" aria-label="Convert text to image button">Convert Text to Image</button>
+      </div>
+      <div id="output-image" aria-label="Output image"></div>
+    </div>
+  </main>
+
+  <script>
+    function convertToImage() {
+      var text = document.getElementById('input-text').value;
+      var fontStyle = document.getElementById('font-style-select').value;
+      var textColor = document.getElementById('text-color-picker').value;
+      var bgColor = document.getElementById('background-color-picker').value;
+      var fontSize = document.getElementById('font-size-range').value;
+
+      var lines = text.split('\n'); // Split text into lines
+
+      var lineHeights = fontSize * 1.2; // Adjust line spacing as needed
+
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+
+      // Set the font before measuring text
+      ctx.font = fontStyle + ' ' + fontSize + 'px ' + getFontFamily(fontStyle);
+
+      // Calculate the maximum width of the text lines
+      var maxLineWidth = 0;
+      lines.forEach(line => {
+        var lineWidth = ctx.measureText(line).width;
+        if (lineWidth > maxLineWidth) {
+          maxLineWidth = lineWidth;
+        }
+      });
+
+      var canvasWidth = maxLineWidth + 20; // Add some padding
+      var canvasHeight = lines.length * lineHeights + 20; // Add some padding
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      ctx.font = fontStyle + ' ' + fontSize + 'px ' + getFontFamily(fontStyle);
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = textColor;
+      ctx.textBaseline = 'top';
+
+      // Render each line of text on the canvas
+      for (var i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i], 10, i * lineHeights + 10);
+      }
+
+      var dataURL = canvas.toDataURL();
+
+      var image = document.createElement('img');
+      image.src = dataURL;
+      image.alt = 'Preview';
+      image.style.width = '100%';
+      image.style.height = '100%';
+      image.style.objectFit = 'cover';
+
+      var outputDiv = document.getElementById('output-image');
+      outputDiv.innerHTML = '';
+      outputDiv.appendChild(image);
+
+      var downloadName = prompt("Enter a name for the image", "techwithsushil");
+
+      var downloadLink = document.createElement('a');
+      downloadLink.href = dataURL;
+      downloadLink.className = 'download';
+      downloadLink.download = downloadName + '.png';
+      downloadLink.innerHTML = 'Download Image';
+outputDiv.appendChild(downloadLink);
+    }
+
+    function getFontFamily(fontStyle) {
+      switch (fontStyle) {
+        case "normal":
+        case "italic":
+        case "bold":
+        case "bold italic":
+          return "Arial";
+        case "normal Courier New":
+        case "italic Courier New":
+        case "bold Courier New":
+        case "bold italic Courier New":
+          return "'Courier New'";
+        case "normal Georgia":
+        case "italic Georgia":
+        case "bold Georgia":
+        case "bold italic Georgia":
+          return "Georgia";
+        case "normal Tahoma":
+        case "italic Tahoma":
+        case "bold Tahoma":
+        case "bold italic Tahoma":
+          return "Tahoma";
+        case "normal Times New Roman":
+        case "italic Times New Roman":
+        case "bold Times New Roman":
+        case "bold italic Times New Roman":
+          return "'Times New Roman'";
+        case "normal Verdana":
+        case "italic Verdana":
+        case "bold Verdana":
+        case "bold italic Verdana":
+          return "Verdana";
+        default:
+          return "Arial";
+      }
+    }
+
+    var convertBtn = document.getElementById('convert-btn');
+    convertBtn.addEventListener('click', convertToImage);
+  </script>
+</body>
+</html>
