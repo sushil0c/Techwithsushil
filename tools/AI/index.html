@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #121212;
+            color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -15,42 +17,37 @@
             height: 100vh;
             margin: 0;
         }
-
         #chatbox {
             display: flex;
             flex-direction: column;
-            background: white;
+            background: #1e1e1e;
             width: 100%;
             max-width: 400px;
             height: 80vh;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
         }
-
         .messages {
             flex: 1;
             padding: 10px;
             overflow-y: auto;
-            border-bottom: 1px solid #eee;
-            touch-action: none; /* Disable default touch actions */
+            border-bottom: 1px solid #333;
         }
-
         .input-container {
             display: flex;
             padding: 10px;
-            background: #fff;
-            border-top: 1px solid #eee;
+            background: #1e1e1e;
         }
-
         .input-container input {
             flex: 1;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             border-radius: 5px;
             margin-right: 10px;
+            background: #2a2a2a;
+            color: white;
         }
-
         .input-container button {
             padding: 10px 15px;
             border: none;
@@ -59,178 +56,82 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .input-container button:hover {
             background: #0056b3;
         }
-
-        .msg, .msg1 {
-            padding: 10px;
+        .message {
             margin: 5px 0;
+            padding: 10px;
             border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
-
-        .msg {
-            background-color: #e1ffc7;
+        .user-message {
+            background-color: #2a2a2a;
+            text-align: right;
         }
-
-        .msg1 {
-            background-color: #c7e1ff;
+        .bot-message {
+            background-color: #3a3a3a;
         }
-
-        .copy-btn {
-            margin-left: 10px;
-            padding: 5px 10px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .copy-btn:hover {
-            background: #218838;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .toast.show {
-            opacity: 1;
+        .loading {
+            font-style: italic;
+            color: #ccc;
         }
     </style>
 </head>
 <body>
-<main>        
-<div class="container">            
-<h2> chatd </h2>            
-
+<main>
     <div id="chatbox" role="region" aria-live="polite" aria-label="AI chat messages">
-        <div id="tb" class="messages"></div>
+        <div class="messages" id="messages"></div>
         <div class="input-container">
-            <input type="text" id="msg_text" placeholder="Type your message here..." aria-label="Message input">
+            <input type="text" id="userInput" placeholder="Type your message here..." aria-label="Message input">
             <button id="sendButton" aria-label="Send message">Send</button>
-            <button id="refreshButton" aria-label="Clear messages">Clear</button>
+            <button id="clearButton" aria-label="Clear messages">Clear</button>
         </div>
     </div>
-    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
-        </div>
-    </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Tech withsushil. All rights reserved.</p>
-        </div>
-    </footer>
-    <script src="scripts.js"></script>
+</main>
+<script>
+    const chatbox = document.getElementById('chatbox');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
+    const clearButton = document.getElementById('clearButton');
+    const messagesContainer = document.getElementById('messages');
 
-    <script>
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+    sendButton.addEventListener('click', async () => {
+        const query = userInput.value;
+        if (query.trim() === '') return;
+
+        // Display user's message
+        appendMessage(`You: ${query}`, 'user-message');
+        userInput.value = '';
+
+        // Show loading message
+        const loadingMessage = appendMessage('Loading...', 'loading');
+
+        // Call the API
+        try {
+            const response = await fetch(`https://darkness.ashlynn.workers.dev/chat/?model=gpt-4o-mini&prompt=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            loadingMessage.remove(); // Remove loading message
+
+            // Display bot's reply
+            appendMessage(`Bot: ${data.response}`, 'bot-message'); // Adjust based on the actual API response structure
+        } catch (error) {
+            loadingMessage.remove(); // Remove loading message
+            appendMessage('Error: Unable to fetch response.', 'bot-message');
         }
+    });
 
-        function send() {
-            const input_msg = document.getElementById('msg_text').value;
-            const tb = document.getElementById('tb');
-            if (input_msg !== '') {
-                const new_msg = document.createElement('div');
-                new_msg.setAttribute('class', 'msg');
-                new_msg.setAttribute('role', 'alert');
-                const newId = generateUniqueId();
-                new_msg.setAttribute('id', newId);
-                tb.appendChild(new_msg);
-                const msg_box = document.getElementById(newId);
-                const msg_text = document.createElement('span');
-                msg_text.innerText = input_msg;
-                msg_box.appendChild(msg_text);
+    clearButton.addEventListener('click', () => {
+        messagesContainer.innerHTML = ''; // Clear all messages
+    });
 
-                showToast('Message sent');
-                document.getElementById('msg_text').value = '';
-
-                const xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        const responseData = JSON.parse(xhttp.responseText);
-                        const answerValue = responseData.answer;
-
-                        const ai_msg = document.createElement('div');
-                        ai_msg.setAttribute('class', 'msg1');
-                        ai_msg.setAttribute('role', 'alert');
-                        const newId = generateUniqueId();
-                        ai_msg.setAttribute('id', newId);
-                        tb.appendChild(ai_msg);
-                        const ai_msg_box = document.getElementById(newId);
-                        const ai_msg_text = document.createElement('span');
-                        ai_msg_text.innerText = answerValue;
-                        ai_msg_box.appendChild(ai_msg_text);
-
-                        showToast('Reply received');
-
-                        const ai_reply_audio = new SpeechSynthesisUtterance(answerValue);
-                        window.speechSynthesis.speak(ai_reply_audio);
-
-                        const copyButton = document.createElement('button');
-                        copyButton.innerText = 'Copy';
-                        copyButton.classList.add('copy-btn');
-                        copyButton.setAttribute('aria-label', 'Copy message');
-                        copyButton.addEventListener('click', function() {
-                            navigator.clipboard.writeText(answerValue);
-                            showToast('Message copied to clipboard');
-                        });
-                        ai_msg_box.appendChild(copyButton);
-                    }
-                    tb.scrollTop = tb.scrollHeight;
-                };
-                xhttp.open("POST", "https://chatgpt.apinepdev.workers.dev/?question=" + encodeURIComponent(input_msg), true);
-                xhttp.send();
-            }
-        }
-
-        document.getElementById('sendButton').addEventListener('click', send);
-
-        document.getElementById('refreshButton').addEventListener('click', function() {
-            const messages = document.querySelectorAll('.msg, .msg1');
-            messages.forEach(msg => msg.remove());
-            const tb = document.getElementById('tb');
-            tb.scrollTop = 0;
-        });
-
-        function generateUniqueId() {
-            return 'id_' + Math.random().toString(36).substr(2, 9);
-        }
-
-        // Touch event handling for sliding messages
-        const messagesDiv = document.querySelector('.messages');
-        let startY = 0;
-        let startScrollTop = 0;
-
-        messagesDiv.addEventListener('touchstart', function(e) {
-            startY = e.touches[0].pageY;
-            startScrollTop = messagesDiv.scrollTop;
-        });
-
-        messagesDiv.addEventListener('touchmove', function(e) {
-            const touch = e.touches[0];
-            const distanceY = touch.pageY - startY;
-            messagesDiv.scrollTop = startScrollTop - distanceY;
-        });
-    </script>
+    function appendMessage(message, className) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageElement.className = `message ${className}`;
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the bottom
+        return messageElement; // Return the message element for further manipulation
+    }
+</script>
 </body>
 </html>
