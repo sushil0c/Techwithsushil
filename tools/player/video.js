@@ -28,7 +28,7 @@ function onPlayerReady(event) {
     document.getElementById('pause').onclick = () => player.pauseVideo();
     document.getElementById('rewind').onclick = () => player.seekTo(player.getCurrentTime() - 10, true);
     document.getElementById('fastForward').onclick = () => player.seekTo(player.getCurrentTime() + 10, true);
-    
+
     // Dark mode toggle
     document.getElementById('darkMode').onclick = () => {
         document.body.classList.toggle('dark');
