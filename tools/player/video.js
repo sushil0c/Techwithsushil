@@ -1,6 +1,16 @@
 let player;
 const urlParams = new URLSearchParams(window.location.search);
-const videoID = urlParams.get('id');
+let videoID = urlParams.get('id');
+
+// Check if the ID is from a short URL format
+if (!videoID) {
+    const shortUrl = window.location.href;
+    const regex = /youtu\.be\/([^?]+)/;
+    const match = shortUrl.match(regex);
+    if (match) {
+        videoID = match[1]; // Extract the video ID from the short URL
+    }
+}
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('video', {
