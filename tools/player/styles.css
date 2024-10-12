@@ -1,19 +1,30 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-}
-
-.container {
-    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .video-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
 .controls {
     margin-top: 10px;
+}
+
+.controls button {
+    margin: 5px;
+}
+
+.dark {
+    background-color: #333;
+    color: white;
+}
+
+.dark .controls button {
+    background-color: #555;
+    color: white;
+}
+
+.dark .controls button:hover {
+    background-color: #777;
 }

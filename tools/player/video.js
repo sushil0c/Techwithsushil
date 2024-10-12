@@ -1,11 +1,28 @@
+let player;
 const urlParams = new URLSearchParams(window.location.search);
 const videoID = urlParams.get('id');
-document.getElementById('video').src = `https://www.youtube.com/embed/${videoID}`;
 
-document.getElementById('play').onclick = () => document.getElementById('video').contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-document.getElementById('pause').onclick = () => document.getElementById('video').contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-document.getElementById('rewind').onclick = () => /* Implement rewind functionality */;
-document.getElementById('fastForward').onclick = () => /* Implement fast forward functionality */;
-document.getElementById('equalizer').onclick = () => /* Implement equalizer functionality */;
-document.getElementById('speed').onclick = () => /* Implement speed functionality */;
-document.getElementById('darkMode').onclick = () => document.body.classList.toggle('dark');
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video', {
+        height: '360',
+        width: '640',
+        videoId: videoID,
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    document.getElementById('play').onclick = () => player.playVideo();
+    document.getElementById('pause').onclick = () => player.pauseVideo();
+    document.getElementById('rewind').onclick = () => player.seekTo(player.getCurrentTime() - 10, true);
+    document.getElementById('fastForward').onclick = () => player.seekTo(player.getCurrentTime() + 10, true);
+    
+    // Dark mode toggle
+    document.getElementById('darkMode').onclick = () => {
+        document.body.classList.toggle('dark');
+        const isDarkMode = document.body.classList.contains('dark');
+        document.getElementById('darkMode').textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+    };
+}
