@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light gray background */
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 80px; /* Space for buttons */
+}
+
+.button-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #343a40; /* Dark gray background for button container */
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around; /* Adjust button spacing */
+}
+
+button, p {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff; /* Blue color for buttons */
+  color: #ffffff; /* White text color for buttons */
+  border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.novel {
+  font-weight: bold;
+}
+
+#currentNovel {
+  margin-top: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="novels">
+<p class="novel" data-src="https://stream-151.zeno.fm/h527zwd11uquv">Ujyaalo Radio Network</p>
+<p class="novel" data-src="https://radio-broadcast.ekantipur.com/stream">Radio Kantipur</p>
+<p class="novel" data-src="http://stream1.radionepal.gov.np/live">Radio Nepal</p>
+<p class="novel" data-src="https://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_vlow/ak/bbc_world_service_news_internet.m3u8">BBC World Service English</p>
+<p class="novel" data-src="https://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_nepali_radio.m3u8">BBC Nepali</p>
+<p class="novel" data-src="https://streaming.softnep.net:10828/;stream.nsv&type=mp3&volume=70">Kalika FM</p>
+<p class="novel" data-src="https://astream.nepalipatro.com.np:8239/index.html">Nepali Radio Network</p>
+<p class="novel" data-src="https://radio-stream-relay-us.hamropatro.com/radio/8020/radio.mp3">Image FM</p>
+<p class="novel" data-src="https://stream-161.zeno.fm/2w81t82wx3duv">Radio Audio</p>
+<p class="novel" data-src="https://stream-43.zeno.fm/xm2babvnephvv">Swadesh FM</p>
+<p class="novel" data-src="https://radio-stream-relay-np.hamropatro.com/radio/8030/radio.mp3">Radio Candid</p>
+<p class="novel" data-src="https://radio-stream-relay-np.hamropatro.com/radio/8050/radio.mp3">Image News</p>
+<p class="novel" data-src="https://usa15.fastcast4u.com/proxy/hitsfm912?mp=/1">Hits FM</p>
+<p class="novel" data-src="http://216.55.141.189:8004">Radio Sagarmatha</p>
+<p class="novel" data-src="http://stream.prixa.net:8000/annapurna">Radio Annapurna Nepal</p>
+<p class="novel" data-src="https://live.itech.host:3880/stream">Synergy FM</p>
+<p class="novel" data-src="https://live.itech.host:3320/stream">Vijaya FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8895">Radio Janata</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com:7032/;">Citizen FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8739">Music City - Nonstop Music</p>
+<p class="novel" data-src="https://live.itech.host:4535/stream">SaptaKoshi FM 90.0 MHz</p>
+<p class="novel" data-src="http://216.55.141.189:8088/;">Radio Kathmandu</p>
+<p class="novel" data-src="http://95.217.153.73:9888/">Nepaliko Radio</p>
+<p class="novel" data-src="http://216.55.141.189:8721/;">BODHI FM </p>
+<p class="novel" data-src="http://streaming.softnep.net:8025">Radio Thaha Sanchar FM (Kathmandu)</p>
+<p class="novel" data-src="http://216.55.141.189:8294/;">Radio Birgunj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8074">FM Adhyatma Jyoti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8230">Nepal FM Network</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8036/stream">Radio City</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8783">Classic FM</p>
+<p class="novel" data-src="https://live.itech.host:9479/stream">Vijayapur Fm</p>
+<p class="novel" data-src="https://live.itech.host:3260/stream">Radio Resunga</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8313">Radio Bheri  FM 98.6 & 102.7 MHz</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8385">KEEPS FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8290">Antenna Foundation Nepal</p>
+<p class="novel" data-src="http://live.itech.host:9012/stream">Radio Taplejung</p>
+<p class="novel" data-src="http://216.55.141.189:8124/;">BFM</p>
+<p class="novel" data-src="https://live.itech.host:8969/stream">Radio Annapurna</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8276">Radio Prakriti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8789/">Radio Nagarik</p>
+<p class="novel" data-src="https://live.itech.host:5005/stream">Everest FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8421">Community Radio Sky FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8109/;">Kalinchowk FM</p>
+<p class="novel" data-src="http://stream.zeno.fm/9ghqvd62238uv">Radio Himalayan</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8443">Radio Suseli</p>
+<p class="novel" data-src="http://streaming.softnep.net:8167/;">Khasyauli FM</p>
+<p class="novel" data-src="http://216.55.141.189:8621/;">Radio Ramaroshan</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8244">Radio Mithila</p>
+<p class="novel" data-src="http://streaming.softnep.net:8003/;">Butwal FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8327">Radio Tulsipur FM</p>
+<p class="novel" data-src="http://live.itech.host:9629/stream">Saptarangi FM</p>
+<p class="novel" data-src="http://216.55.141.189:8060/;">QN Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5507">Radio Himshikhar</p>
+<p class="novel" data-src="http://95.217.153.73:8004/;">Radio Amurta</p>
+<p class="novel" data-src="http://live.itech.host:8326/stream">Radio Didibahini</p>
+<p class="novel" data-src="http://live.itechnepal.com:8676/stream">Radio Nepalbani</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8553">24 Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8349/;">Radio Buddha Awaaz</p>
+<p class="novel" data-src="https://live.itech.host:3985/stream">Dinesh FM 93.8 Mhz</p>
+<p class="novel" data-src="http://live.itech.host:7016/stream">Radio Sankhuwasava</p>
+<p class="novel" data-src="http://216.55.141.189:8713/;">Radio Dhangadhi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8060/;">Khozee Radio</p>
+<p class="novel" data-src="http://live.itech.host:8744/stream">Pathivara FM</p>
+<p class="novel" data-src="http://216.55.141.189:8387/;">Radio Times</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8258/;">Hajurko Radio</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8046/stream">Jagaran FM</p>
+<p class="novel" data-src="http://live.itechnepal.com:8286/stream">Khandbari fm</p>
+<p class="novel" data-src="https://live.itech.host:9149/stream">Radio Safalta</p>
+<p class="novel" data-src="https://live.itech.host:9550/stream">Solu FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8491">Pradesh FM</p>
+<p class="novel" data-src="https://live.itech.host:3765/stream">Radio Vision (Jhapa)</p>
+<p class="novel" data-src="https://live.itech.host:4515/stream">Radio Lumbini</p>
+<p class="novel" data-src="https://live.itech.host:8429/stream">Krishnasar FM</p>
+<p class="novel" data-src="http://216.55.141.189:8669/;">Nuwakot FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8054/;">Himal FM </p>
+<p class="novel" data-src="https://streaming.hamropatro.com:8329/;">Radio Namobuddha</p>
+<p class="novel" data-src="http://live.itechnepal.com:9635/stream">Ilam FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8136/;">Radio Deshantar</p>
+<p class="novel" data-src="https://streaming.softnep.net:10944/;">Kool FM </p>
+<p class="novel" data-src="http://live.itechnepal.com:8922/live">Radio Amargadhi</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8002/stream">Sky FM</p>
+<p class="novel" data-src="http://live.itechnepal.com:9539/stream?type=.mp3">Star FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8455/;">Tinjure Online</p>
+<p class="novel" data-src="http://streaming.softnep.net:8051/;">Radio Melamchi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8473/;">Radio Bandipur FM</p>
+<p class="novel" data-src="https://live.itech.host:9519/live">Tikapur FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8009/;">ACORAB</p>
+<p class="novel" data-src="https://live.itech.host:9418/stream">Grace FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8014/;">Radio Highway</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8637/;">Radio Tiger</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8571/;">Mero Sathi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8603/;">Chitwan Radio Network</p>
+<p class="novel" data-src="http://streaming.softnep.net:8129/;">Radio Parasi</p>
+<p class="novel" data-src="http://live.itech.host:9443/stream?mp3">Radio Sarada</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8032/;">Radio Langtang</p>
+<p class="novel" data-src="http://streaming.softnep.net:8309/;">Bhaktapur FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10969/;">Afno FM</p>
+<p class="novel" data-src="https://live.itech.host:9113/stream">Radio Bihani</p>
+<p class="novel" data-src="https://live.itech.host:9442/stream">Gunjan FM</p>
+<p class="novel" data-src="https://live.itech.host:7137/stream">Shuklagandaki FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8236/;">Radio Madanpokhara FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8529/;">Damauli FM</p>
+<p class="novel" data-src="https://centova1.toofancom.com/proxy/trafficradio?mp=/stream">Metro Traffic FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8139/;">Ichchhakamana FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8477/;">Radio Mandavi FM</p>
+<p class="novel" data-src="http://216.55.141.189:8593/;">Radio Mukti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8138/;">Radio Arpan </p>
+<p class="novel" data-src="http://streaming.softnep.net:8299/;">Radio Rajmarga</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8615/;">Radio Bindas</p>
+<p class="novel" data-src="https://streaming.softnep.net:10951/;">Darchula FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8467/;">Radio Palpa</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8188/;">Radio Baadal</p>
+<p class="novel" data-src="http://streaming.softnep.net:8149/;">Radio Koseli FM</p>
+<p class="novel" data-src="https://samachardata.radioca.st/;">RADIO SAAJHA CHAUTARI</p>
+<p class="novel" data-src="http://216.55.141.189:8523/;">Radio Sanket</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8577/;">Radio Sadvab</p>
+<p class="novel" data-src="https://live.itech.host:8009/stream">Radio Unnati</p>
+<p class="novel" data-src="https://online.net.np/8040/stream">Radio Harpal</p>
+<p class="novel" data-src="http://streaming.softnep.net:8061/;">Radio Bihani</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8487/;">Radio Chhimkeshwori</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8034/stream">Radio Jhapa</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8659/;">Radio Holeri FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8629/;">Radio Madi Aawaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8767/;">Radio Makawanpur gadi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8417/;">Radio Madhesh</p>
+<p class="novel" data-src="http://live.itechnepal.com:7042/stream?type=.mp3">Dautari FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8835/;">Newa FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8373/;">Sandhikharka FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8063/;">Radio Aafno FM (Rukum)</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8240/;">Radio Bardibas</p>
+<p class="novel" data-src="https://streaming.softnep.net:10863/;">Radio Sathi</p>
+<p class="novel" data-src="http://live.itech.host:4630/stream">Radio Top Town</p>
+<p class="novel" data-src="http://streaming.softnep.net:8151/;">Radio Samagra Madhesh</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Simana</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8301/;">Radio Janamukhi</p>
+<p class="novel" data-src="http://streaming.softnep.net:8177/;">Radio Seven Star</p>
+<p class="novel" data-src="http://streaming.softnep.net:8083/;">Radio Barahi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8325/;">Radio Bharatpur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8821/;">Radio Akala </p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8272/;">Narayani FM 103.8 MHz</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8795/;">Radio Sungabha  104.6</p>
+<p class="novel" data-src="https://live.itech.host:8663/stream">Radio Gurbaba FM</p>
+<p class="novel" data-src="https://live.itech.host:4585/stream">Tilottama FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8078/;">Radio Mero Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8645/;">Vision FM (Okhaldhunga)</p>
+<p class="novel" data-src="https://live.itech.host:4515/stream">Radio Lumbini</p>
+<p class="novel" data-src="http://216.55.141.189:8633/;">Radio Sarlahi</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8020/radio.mp3">Radio pallawee </p>
+<p class="novel" data-src="http://streaming.softnep.net:8175/;">Prime Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8733/;">Radio Paryabaran</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Rautahat FM</p>
+<p class="novel" data-src="https://live.itech.host:2275/stream">Radio Chitwan </p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8098/;">Radio Ramechhap</p>
+<p class="novel" data-src="http://streaming.softnep.net:8211/;">Bhanu FM</p>
+<p class="novel" data-src="http://centova1.toofancom.com:4193/;">Radio Roshi </p>
+<p class="novel" data-src="http://streaming.softnep.net:8227/;">Radio Netrajyot</p>
+<p class="novel" data-src="http://live.itech.host:8792/stream">Radio Janapriya </p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8711/;">Radio Malangwa</p>
+<p class="novel" data-src="http://streaming.softnep.net:8251/;">Neelkantha FM </p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8535/;">Dhaulagiri Fm</p>
+<p class="novel" data-src="http://live.itech.host:9006/stream">Radio Madhyapaschim</p>
+<p class="novel" data-src="https://stream-41.zeno.fm/r6teyggpq7zuv?zs=TIoXQy1gREyY9Y54-eqJMw">RADIO BUDHINANDA FM</p>
+<p class="novel" data-src="http://live.itechnepal.com:9180/live">Radio Muktinath</p>
+<p class="novel" data-src="http://live.itech.host:7028/live">Radio Shivashakti</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Dullu FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8095/;">Sumhatlung FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8827/;">Online Radio Tribeni (Rolpa)</p>
+<p class="novel" data-src="http://live.itech.host:8338/stream?mp3">Radio Namaste</p>
+<p class="novel" data-src="http://live.itechnepal.com:9048/stream?type=.mp3">Eagle FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8119">Relation FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8743">Radio Swargadwari FM</p>
+<p class="novel" data-src="http://live.itechnepal.com:9174/stream?type=.mp3">Radio Sailung</p>
+<p class="novel" data-src="http://streaming.softnep.net:8001/">Radio Thaha Sanchar FM (Hetauda)</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Planet</p>
+<p class="novel" data-src="http://streaming.softnep.net:8037/">Capital FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8457">Radio Madi</p>
+<p class="novel" data-src="http://streaming.softnep.net:8165">Saipal FM</p>
+<p class="novel" data-src="http://edge-audio-03-gos2.sharp-stream.com/ssvcbfbs3.mp3">BFBS Gurkha Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8823">Kanchanjungha FM</p>
+<p class="novel" data-src="https://live.itech.host:3240/stream">Radio Paschim Today</p>
+<p class="novel" data-src="http://216.55.141.189:8114">Hamro FM</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Apostle FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8201">Rupandehi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8256">Choice FM</p>
+<p class="novel" data-src="https://live.itech.host:9125/stream">Radio Marsyangdi</p>
+<p class="novel" data-src="https://streaming.softnep.net:10874">Radio Rudraksha</p>
+<p class="novel" data-src="https://streaming.softnep.net:10981/;">Radio Madhyabindu</p>
+<p class="novel" data-src="https://live.itech.host:2705/stream">Radio Miteree</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Headlines & Music FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8435">Radio Kawasoti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8208/">Pathivara Online Radio</p>
+<p class="novel" data-src="https://live.itech.host:9425/stream">Radio Sanobheri FM</p>
+<p class="novel" data-src="http://216.55.141.189:8419">Swarnim FM</p>
+<p class="novel" data-src="https://live.itech.host:8951/stream">Radio Lamjung</p>
+<p class="novel" data-src="http://streaming.softnep.net:8057">Radio Makawanpur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8471">Hetauda FM</p>
+<p class="novel" data-src="https://online.net.np/8116/stream">Radio Jana  Sanchar</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8021">Radio Udaypur</p>
+<p class="novel" data-src="http://streaming.softnep.net:8041/">Radio Sindhu</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8292">Nawalpur FM</p>
+<p class="novel" data-src="https://live.itech.host:9556/stream">Hamro Radio</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Samarpan</p>
+<p class="novel" data-src="https://online.net.np/8042/stream">Radio Upatyaka</p>
+<p class="novel" data-src="http://node-12.zeno.fm/5g8sn1w1em8uv?rj-ttl=5&rj-tok=AAABd_IDgdkAp4IYSd9uAPj8rg">Radio Nagarik</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8499">FM Plus</p>
+<p class="novel" data-src="https://live.itech.host:8149/stream">Radio Jaljala</p>
+<p class="novel" data-src="https://live.itech.host/himalayaradio">Radio Himalaya</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8250/">Radio Satellite</p>
+<p class="novel" data-src="http://streaming.softnep.net:10902/;stream.nsv&type=mp3&volume=10">Radio Rapti</p>
+<p class="novel" data-src="http://streaming.softnep.net:8105">Radio Bajura</p>
+<p class="novel" data-src="http://streaming.softnep.net:8293">Tinau FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8094">Radio Athrai</p>
+<p class="novel" data-src="http://live.itech.host:7093/stream">Radio Sahino</p>
+<p class="novel" data-src="http://live.itech.host:1440/stream">Radio Nation</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8068">Radio Hapure</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Sanfebagar</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Sindhu FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8071">Radio Chankheli</p>
+<p class="novel" data-src="https://streaming.softnep.net:10925/;">Radio Simara</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8469">Radio Sarathi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8663">Times FM</p>
+<p class="novel" data-src="http://live.itech.host:2030/stream">Radio Rampur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8619">A One FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8150">Radio Rolpa</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Namaste</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Kites FM</p>
+<p class="novel" data-src="http://onlineradio.websoftitnepal.com:8048/">Nepali Sanchar Radio</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Mangsebung</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8727">Radio Jiri</p>
+<p class="novel" data-src="https://live.itech.host:2680/stream">Machhapuchhre FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8056">Radio Kushum</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Music Joy Radio</p>
+<p class="novel" data-src="http://live.itechnepal.com:7039/stream?type=.mp3">Radio All Star Online</p>
+<p class="novel" data-src="https://live.itech.host:3230/stream">Radio Paschim Awaj</p>
+<p class="novel" data-src="http://live.itech.host:1680/stream">Radio Society FM</p>
+<p class="novel" data-src="https://direct.sharp-stream.com/sunriseradio.mp3">Sunrise Radio</p>
+<p class="novel" data-src="https://live.itech.host:9155/stream">Radio Terhathum </p>
+<p class="novel" data-src="https://stream.zeno.fm/4pfph3kr44zuv">Ruru FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10982/;stream.nsv&type=mp3&volume=70">Radio Sarangi (Pokhara)</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8709">Shakti FM</p>
+<p class="novel" data-src="https://live.itech.host:9598/stream">Shreenagar FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8569">Radio Deurali</p>
+<p class="novel" data-src="http://216.55.141.189:8046">Triveni Times FM 100.6</p>
+<p class="novel" data-src="http://216.55.141.189:8515">Radio Ekata</p>
+<p class="novel" data-src="https://live.itech.host:8719/stream">Radio Hamro Paila FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10992/">Radio Rasuwa</p>
+<p class="novel" data-src="https://live.itech.host:2360/stream">Radio Jajarkot</p>
+<p class="novel" data-src="https://live.itech.host:9382/stream">Radio Tiphadee</p>
+<p class="novel" data-src="https://live.itech.host:7051/stream">Pakhribas FM</p>
+<p class="novel" data-src="http://216.55.141.189:8773">Radio Karnali FM Jumla</p>
+<p class="novel" data-src="https://stream.zeno.fm/as8n057z4k8uv">Radio Barathawa</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8016/">Radio Burtibang</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8296">Radio Kalaiya</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8002/stream">Sirish FM</p>
+<p class="novel" data-src="https://canada1.reliastream.com/proxy/narendra?mp=/stream">Radio Ghanteshwor</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8112">Hamro malika FM</p>
+<p class="novel" data-src="http://stream.orangictech.com.np:8050/colorsfm.mp3">Colors FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8379">Radio Mayadevi</p>
+<p class="novel" data-src="https://streaming.softnep.net:10907/;stream.nsv&type=mp3&volume=70">Radio Kanchan</p>
+<p class="novel" data-src="http://node-25.zeno.fm/v3e78tqm5gruv.aac">24 Nepali Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8377">Radio Jalpa</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8128">Unique FM</p>
+<p class="novel" data-src="https://securestream.casthost.net:8033/stream">Gurkha Radio</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8032/stream">Makalu FM</p>
+<p class="novel" data-src="https://live.itech.host:1580/stream">Radio Nikash</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8100/stream">Radio Nagarik</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8333">Radio Bijayabasti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8361">Radio Mahila Aawaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8365">Radio Samarthya</p>
+<p class="novel" data-src="http://185.181.63.148:8010/halesifm">Halesi FM</p>
+<p class="novel" data-src="https://live.itech.host:1730/stream">Darpan FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8493">Radio Kapurkot FM</p>
+<p class="novel" data-src="http://live.itech.host:8910/stream?mp3">Radio Tahalka</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8755">Radio Malarani</p>
+<p class="novel" data-src="http://live.itech.host:2100/stream">Panchthar FM</p>
+<p class="novel" data-src="https://live.itech.host:8903/stream?type=.mp3">Radio Paurakhi</p>
+<p class="novel" data-src="https://streaming.softnep.net:10848/;stream.nsv&type=mp3">Radio Lekhnath</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8865">Radio Mahabharat</p>
+<p class="novel" data-src="http://live.itechnepal.com:2160/stream">Radio Jugal</p>
+<p class="novel" data-src="https://stream.zeno.fm/8jom9icy7aduv">Madhesh Jana Aawaj FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8879">Radio Sambridha Nepal</p>
+<p class="novel" data-src="http://live.itechnepal.com:7165/stream">Suryodaya FM</p>
+<p class="novel" data-src="https://stream.zeno.fm/1zu1zan4mp8uv">Radio Rhythm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8751">Radio Anmol</p>
+<p class="novel" data-src="http://live.itech.host:2320/stream">Radio Chapakot</p>
+<p class="novel" data-src="http://live.itech.host:2460/stream">Mix FM</p>
+<p class="novel" data-src="http://centova1.toofancom.com:4753">Radio Rastriya</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8459">Radio Dhurkot</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8054/stream">Radio Sarangkot 104.6</p>
+<p class="novel" data-src="http://streaming.softnep.net:8143/stream.mp3">Bhojpuriya FM</p>
+<p class="novel" data-src="http://live.itech.host:2430/stream?mp3">Radio Artha Sarokar</p>
+<p class="novel" data-src="http://live.itech.host:1260/stream?type=.mp3">Galkot FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8849">Radio Kamal</p>
+<p class="novel" data-src="http://live.itech.host:2870/stream">Itahari FM 92.5 MHZ</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8587/stream">Power FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:4156">24 Asal Sathi Radio</p>
+<p class="novel" data-src="http://live.itech.host:2650/stream">Radio Bulletin</p>
+<p class="novel" data-src="https://live.itech.host:8273/stream">Shaileshwori FM</p>
+<p class="novel" data-src="https://live.itech.host:3180/stream">Radio Malmala</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8631">Radio Sandesh</p>
+<p class="novel" data-src="http://live.itech.host:8974/stream?mp3">Radio Chimteshwor</p>
+<p class="novel" data-src="https://live.itech.host:9592/live">Heart FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8234">3 Angels Community Radio</p>
+<p class="novel" data-src="http://216.55.141.189:8268">Radio Bharosa</p>
+<p class="novel" data-src="http://onlineradio.websoftitnepal.com:8006/">Online Radio Darpan</p>
+<p class="novel" data-src="https://streaming.softnep.net:10982/;stream.nsv&type=mp3&volume=70">Radio Sarangi (Morang)</p>
+<p class="novel" data-src="https://live.itech.host:8815/stream">Radio Sunwal</p>
+<p class="novel" data-src="http://live.itech.host:9575/stream">Siddhartha  FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8740">Kalika FM Musical</p>
+<p class="novel" data-src="http://216.55.141.189:8857/;stream.mp3">Sanatan Radio Network</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8855">Radio Devghat</p>
+<p class="novel" data-src="https://stream.zeno.fm/pq0bz4vez38uv">Radio Tharuhat</p>
+<p class="novel" data-src="https://live.itech.host:9526/stream">Sunakhari Radio live</p>
+<p class="novel" data-src="https://live.itech.host:9436/stream">Radio Devdaha</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8036">Radio Pratibodh F.M</p>
+<p class="novel" data-src="https://live.itech.host:8442/stream">Radio Siddhababa</p>
+<p class="novel" data-src="https://live.itech.host:9388/stream">Radio Chautari</p>
+<p class="novel" data-src="https://centova1.toofancom.com/proxy/radioderby?mp=/stream">Radio Derby</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8170/stream">Radio Manahari FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8263/">Happy FM</p>
+<p class="novel" data-src="https://live.itech.host:8945/stream">Radio Tamor</p>
+<p class="novel" data-src="https://live.itech.host:7019/stream">Namaste FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8317">Radio Maurakhara FM</p>
+<p class="novel" data-src="https://live.itech.host:4675/stream?type=.mp3">Nagarik FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8579">Radio Sandesh 106.9</p>
+<p class="novel" data-src="https://live.itech.host:8379/stream">Bhorukawa FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8341/">Khulaasa News</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8853">Radio Rukmini</p>
+<p class="novel" data-src="http://streaming.softnep.net:8265">Kohalpur FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8307/">Kochila  FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8241/">NepalBodh</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5501">Radio Nigarani</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8761">Radio Tufan</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8082/stream">Radio Bandhan</p>
+<p class="novel" data-src="https://stream-152.zeno.fm/1qgfbe6sz1zuv">Radio Shringeshwor (SFM)</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8495">Radio Kaski 96.5</p>
+<p class="novel" data-src="https://live.itech.host:1570/stream">Radio Purbirukum</p>
+<p class="novel" data-src="http://centova1.toofancom.com:4770">Radio Pariwartan</p>
+<p class="novel" data-src="https://live.itech.host:8863/stream">Radio Aandhikhola</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8719">Radio Bijayakilla</p>
+<p class="novel" data-src="https://live.itech.host:4590/stream">Katahariya FM</p>
+<p class="novel" data-src="http://stream.zeno.fm/5uewmme4e8zuv">Baideshik Rojgar</p>
+<p class="novel" data-src="http://live.itech.host:2620/stream">Radio Manko Majheri</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8679">Radio Puspanjali</p>
+<p class="novel" data-src="https://streaming.softnep.net:10827/">Radio Sauraha</p>
+<p class="novel" data-src="https://live.itech.host:8006/stream">Radio Bheriganga</p>
+<p class="novel" data-src="https://ec1.everestcast.host:1225/stream?type=.mp3">Radio Swabhiman</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8050/radio.mp3">Radio Bageshwori FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8090">Radio Jhankar</p>
+<p class="novel" data-src="http://chaudandigadhi.online.org.np:8098">Radio Chaudandigadhi FM</p>
+<p class="novel" data-src="https://live.itech.host:9502/stream">Radio Gurkhali</p>
+<p class="novel" data-src="https://streaming.softnep.net:10824/;">Jayaprithvi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5511">Samabeshi FM</p>
+<p class="novel" data-src="https://live.itech.host:3280/stream">Naya Aviyan FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10877/;">NB Radio Network</p>
+<p class="novel" data-src="http://live.itechnepal.com:8294/stream">Radio Kanchanpur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8813">Radio Khotang</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5515">Radio  Aarambha</p>
+<p class="novel" data-src="https://live.itech.host:3250/stream">Radio Rapti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8445">Apan FM</p>
+<p class="novel" data-src="https://live.itech.host:8501/stream">Radio Naya Karnali FM</p>
+<p class="novel" data-src="https://live.itech.host:9454/stream">Radio Dhading</p>
+<p class="novel" data-src="http://stream.zeno.fm/qe715t14gwzuv">Bhairab Radio</p>
+<p class="novel" data-src="https://live.itech.host:2800/stream">Radio BSC Nepal</p>
+<p class="novel" data-src="https://live.itech.host:4665/stream">Radio Bannigadhi</p>
+<p class="novel" data-src="https://sp14.instainternet.com/8138/stream">Radio Okhaldhunga FM</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Radio Rupantaran</p>
+<p class="novel" data-src="http://216.55.141.189:8573">Bulbule FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8357">Radio Nagarik Chaso</p>
+<p class="novel" data-src="https://live.itech.host:4755/stream">Radio Badimalika</p>
+<p class="novel" data-src="http://centova1.toofancom.com:4163">Radio Mission</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8030/stream">Best FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8753">Radio Durga Bhagawati</p>
+<p class="novel" data-src="http://216.55.141.189:8321">Radio Lipulek</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Radio Ganatantra Aawaj</p>
+<p class="novel" data-src="http://95.217.153.73:8044/;">Radio Baitadi</p>
+<p class="novel" data-src="http://95.217.153.73:8042/;">Radio Active FM</p>
+<p class="novel" data-src="https://live.itech.host:3100/stream">Radio Indrasarowar</p>
+<p class="novel" data-src="https://stream.zeno.fm/uyo4dbsay4cuv">Nsanchar Online Radio</p>
+<p class="novel" data-src="http://centova1.toofancom.com:5180">Shepherd FM (Chitwan)</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8014/stream">Radio Melauli</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8803">Jhuleni FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8793">Radio Kairan</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8799">Radio Energy 106.2 MHz</p>
+<p class="novel" data-src="https://live.itech.host:4495/stream">Radio Bhimeshwar</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8801/stream">Radio Jwala Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8805">Radio Prabhu FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8363">Radio Bagmati</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8363">Darshan Fm Online</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8172">Radio Kamalbazar</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8010">Radio Sudur Sanchar</p>
+<p class="novel" data-src="https://live.itech.host:1510/stream">Radio Hemja</p>
+<p class="novel" data-src="http://streaming.softnep.net:8009">CIN</p>
+<p class="novel" data-src="https://online.net.np/8042/stream">Radio Comedy Champion</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8066/stream">Tarahara FM</p>
+<p class="novel" data-src="https://live.itech.host:3090/stream">Radio Arun</p>
+<p class="novel" data-src="https://live.itech.host:1525/stream">Radio Sindhuli Gadhi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8815">Radio Madhaypahad</p>
+<p class="novel" data-src="http://rserver.domaininnepal.com:8014/janaknandani">Janaknandani F.M</p>
+<p class="novel" data-src="https://live.itech.host:8645/stream">Mithilanchal FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8142">Broad FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8817">Radio Gaunghar</p>
+<p class="novel" data-src="https://live.itech.host:1270/stream">Radio Galkot</p>
+<p class="novel" data-src="http://rstream.abgroupnepal.com:8000/radiosargam">Radio Sargam</p>
+<p class="novel" data-src="http://stream.zeno.fm/72cb9dcu1nhvv">Radio Bara</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8797">Radio Darpan</p>
+<p class="novel" data-src="https://live.itech.host:9394/stream">Radio Samagra</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8144">Radio Himali</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8897">Radio Sambridha Nepal (Nesdo Fm)</p>
+<p class="novel" data-src="https://live.itech.host:8585/stream">Radio Naya Nepal FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8833">Radio Hamro Samabeshi</p>
+<p class="novel" data-src="https://streaming.softnep.net:10826/;stream">Radio Bangalachuli</p>
+<p class="novel" data-src="https://live.itech.host:9167/stream">Ganatantra FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8112">Dhadkan Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8465">Radio Serofero</p>
+<p class="novel" data-src="http://216.55.141.189:8134">Metro Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8080">BG FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8683">Radio Dadadara</p>
+<p class="novel" data-src="http://stream.zeno.fm/6fdza6c95zhvv">Online Radio Rangin</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8769">Radio Mission</p>
+<p class="novel" data-src="http://live.itech.host:1970/;?type=http%26nocache=1571378684">Janata Radio</p>
+<p class="novel" data-src="http://216.55.141.189:8737">Heart Beat F.M.</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8635">Janata Samaj Radio Network</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8843">UK FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8849">Radio Pariwartan Silaawaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8849">Radio Chinari</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Radio Samakhabar</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8831">Radio Mantra</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8092">Radio Gangajal</p>
+<p class="novel" data-src="https://live.itech.host:8933/stream">Radio laligurans</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8681">Radio Sworgabhumee FM</p>
+<p class="novel" data-src="https://live.itech.host:4060/stream">Radio Aaha</p>
+<p class="novel" data-src="https://live.itech.host:3905/stream">Radio Shimbhunath</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8046/stream">Radio Suprim</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8347">Radio Madhesh FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8859">Sarobar Radio Network</p>
+<p class="novel" data-src="http://216.55.141.189:8086">Shubheksha FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8461">Dudhauli Fm</p>
+<p class="novel" data-src="https://stream.zeno.fm/0cu4ikikynntv">Online FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8335">Radio Hamro Pahunch</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8869">Radio KBM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8871">Radio Marin</p>
+<p class="novel" data-src="https://live.itech.host:2580/stream">Radio Sajha Aawaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8076">Radio Kabeli</p>
+<p class="novel" data-src="https://live.itech.host:2300/stream">Radio ABC</p>
+<p class="novel" data-src="https://streaming.softnep.net:10969/;stream.nsv&type=mp3&volume=70%22">Afno Fm Okhaldhunga</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8118/stream">Darshan FM</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8010/radio.mp3">Radio Chhatrabhumi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8885">Radio Kutumba</p>
+<p class="novel" data-src="https://live.itech.host:4775/stream">Upahar FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8331">Radio Famous Fm</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8070/radio.mp3">Radio Suddhodhan</p>
+<p class="novel" data-src="http://216.55.141.189:8066">Smart FM</p>
+<p class="novel" data-src="http://stream.zeno.fm/sxr8kkycjseuv">ARK FM</p>
+<p class="novel" data-src="https://stream-42.zeno.fm/occ1fsmvdq0uv?zs=GC0HK9Y5QE-5wu_PVVgitw">Radio Bagmati</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8150/radio.mp3">Radio Attariya</p>
+<p class="novel" data-src="http://216.55.141.189:8082">Gujaramai Fm 99.7</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Nepal Network</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8132">Radio Rajapur</p>
+<p class="novel" data-src="http://stream.zeno.fm/qe715t14gwzuv">Rastriya Sandesh</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8052/stream">Bajjika FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8531">Radio Baiteshwor</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8170">Radio Janmabhumi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8557">Radio Barsha</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8599">Radio Shreenagar FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8353">Kaligandaki FM (Gulmi)</p>
+<p class="novel" data-src="https://live.itech.host:4180/stream">Radio Sathi FM</p>
+<p class="novel" data-src="https://live.itech.host:9107/stream">Galyang FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5509">Sambad FM</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8092/stream">Rajbanshi Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8537">Radio Naya Nepal</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8030/radio.mp3">Suryamukhi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8174">Online Radio Nabin Sanchar</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8677">Radio Pathsala Nepal</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8252">Radio Sanjiwani FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8563">Radio Dibyabani</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8695">Radio Belaka FM</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8010/stream">Shuklaphanta FM </p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8114/stream">Radio Purbanchal</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8651">Radio Sanskriti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8691">Radio Bajhang</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8122/stream">Saimon FM</p>
+<p class="novel" data-src="https://live.itech.host:1605/stream">Barahathawa FM</p>
+<p class="novel" data-src="https://live.itech.host:2390/stream">Radio Sahayatri</p>
+<p class="novel" data-src="https://live.itech.host:9035/stream">Radio Belauri</p>
+<p class="novel" data-src="http://streaming.softnep.net:8179">Radio Ninglashaini FM</p>
+<p class="novel" data-src="https://live.itech.host:8639/stream">Radio Sudoorawaz</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8032/stream">Radio Unity</p>
+<p class="novel" data-src="https://live.itech.host:8891/stream">Radio Syangja</p>
+<p class="novel" data-src="https://stream.zeno.fm/6fdk6gyrhm8uv">Kathariya Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8108">Radio Kapilvastu</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5513">Naya Aasha FM</p>
+<p class="novel" data-src="https://live.itech.host:8337/stream">Dolpa FM</p>
+<p class="novel" data-src="http://216.55.141.189:9380">Radio Janakpur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8038">Dudhmati FM</p>
+<p class="novel" data-src="https://live.itech.host:1210/stream">Radio Shweta Shardul</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8270">Unique FM</p>
+<p class="novel" data-src="https://stream.zeno.fm/yowpdmuxurrvv">Radio Tila Aawaj</p>
+<p class="novel" data-src="https://radio-streaming-serv.hamropatro.com:8140/radio.mp3">BP Bichar Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8232">Radio Mirmire</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8539">Myagdikali FM 88.2 Mhz</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8811">Radio Matribhumi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8715">Radio Sambriddhi</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5519">Radio Sunchhahari</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8881">Radio Satyabani</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8028">Radio Dhanushadham</p>
+<p class="novel" data-src="https://live.itech.host:1380/stream">Kingdom Voice FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8867">Radio Sitganga</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8519">Radio Indreni</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8024/stream">Popular FM 99.5</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8008">Samad FM</p>
+<p class="novel" data-src="http://216.55.141.189:1084">Radio Jhurjhure</p>
+<p class="novel" data-src="http://streaming.softnep.net:8331/">Radio Nayan</p>
+<p class="novel" data-src="https://stream.hamropatro.com/4141">Tamakoshi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8791">Radio Juntara</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8729">Radio Paschimanchal FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8220">Maulapur FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8047">Radio Sangeet</p>
+<p class="novel" data-src="https://live.itech.host:8314/stream">Radio Khalanga</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8625">Radio King Fm</p>
+<p class="novel" data-src="https://live.itech.host:8015/stream">Helambu FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10884/;stream.nsv&type=mp3&volume=50">Radio Lokpriya Netrajyoti</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8837">Radio Sajha Online</p>
+<p class="novel" data-src="https://live.itech.host:8839/stream">Dhurbatara FM</p>
+<p class="novel" data-src="http://streaming.softnep.net:8267">Radio Kailali</p>
+<p class="novel" data-src="http://stream.zeno.fm/cvmbonh20ymtv">Kirat Awaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8649">Kiss FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8333">Radio Pokhariya</p>
+<p class="novel" data-src="https://live.itech.host:2145/stream">Radio Prithivi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8863">Radio Narayani (Online)</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8875">Mudkechula FM</p>
+<p class="novel" data-src="https://live.itech.host:4905/stream">Radio Terai</p>
+<p class="novel" data-src="https://online.net.np/8004/stream">Radio Samabeshi Aawaj</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8411">Radio Menchhyayem</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8815">Radio Madhyapahad</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8003/stream">Radio Jugar FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8254">Radio Saligram</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8084">Radio Palung</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8483">Radio Chaurjahari</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8034">Radio Sunaulo FM</p>
+<p class="novel" data-src="https://live.itech.host:9496/stream">Radio Dhorbarahi</p>
+<p class="novel" data-src="https://live.itech.host:8749/stream">Pathibhara FM</p>
+<p class="novel" data-src="https://live.itech.host:3830/stream">Radio Surkhet</p>
+<p class="novel" data-src="https://26383.live.streamtheworld.com/SAM04AAC227_SC">Chitwan Online FM</p>
+<p class="novel" data-src="https://live.itech.host:9519/live">Radio Tikapur</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8809">Radio Salhesh</p>
+<p class="novel" data-src="https://stream-150.zeno.fm/t7d0knup6x8uv">Bishwas FM</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8022/stream">Radio Lakecity</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8002/stream">Websoft IT Nepal Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8058">Radio Sannitriveni</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8012">Radio Paschim Pokhara</p>
+<p class="novel" data-src="https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_OLIVE_HITS_S02AAC.aac">Radio Olive Nepal</p>
+<p class="novel" data-src="https://live.itech.host:8391/live">C FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8200">Manakamana FM</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Today</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Radio Apostle</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8511">Radio Panchadewal</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8647">Radio Jaleshwarnath</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Chhathar Fm</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8315">Geruwa FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:9001">Radio Nalagad</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8100">Radio Shubhakalika FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8381">Radio Bhotewodar</p>
+<p class="novel" data-src="https://stream.zeno.fm/nsxexttokuhvv">Radio Gaurab</p>
+<p class="novel" data-src="http://centova1.toofancom.com:5128">Radio Shepherd (Dhulikhel)</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Indreni FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8118">Radio Swagatam</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8126">Radio Dhalkebar</p>
+<p class="novel" data-src="https://stream-151.zeno.fm/bx7t5muk8k8uv?zs">Syangja Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8825">Panchase FM</p>
+<p class="novel" data-src="https://onlineradio.websoftitnepal.com/8074/stream">Red FM</p>
+<p class="novel" data-src="http://live.itechnepal.com:9078/stream">Radio Bhojpur FM</p>
+<p class="novel" data-src="https://live.itech.host:9173/stream">Radio Birat</p>
+<p class="novel" data-src="http://stream.zeno.fm/nsxexttokuhvv">Radio Saugat</p>
+<p class="novel" data-src="https://live.itech.host:8773/stream">Radio Janani</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8024/stream">Radio KMC</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:8030">Radio Sainamaina</p>
+<p class="novel" data-src="https://stream.zeno.fm/fjdb83oq3e0uv">Radio Malashree</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5505">Radio Panini FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5503">Radio Api FM</p>
+<p class="novel" data-src="https://streaming.webhostnepal.com/8036/stream">Radio Lokdarpan</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5517">Radio Smart</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5521">Radio Kolhabi</p>
+<p class="novel" data-src="https://centova1.toofancom.com/proxy/radioeverest?mp=/stream">Radio Everest</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5523">Radio Ghodaghodi FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5525">Shikhar FM</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5529">Swargadwari Online Radio</p>
+<p class="novel" data-src="http://streaming.hamropatro.com:5527">Radio Bhiswa FM</p>
+<p class="novel" data-src="https://streaming.softnep.net:10850/;stream.nsv&type=mp3&volume=70">Krishi Radio</p>  </div>
+</div>
+<div id="currentNovel"></div>
+<div class="button-container">
+  <button id="playPauseBtn">Play</button>
+</div>
+<script>
+const novels = document.querySelectorAll('.novel');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const recordBtn = document.getElementById('recordBtn');
+let audioPlayer = null;
+let mediaRecorder = null;
+let isRecording = false;
+let chunks = [];
+
+novels.forEach(novel => {
+  novel.addEventListener('click', function() {
+    const audioSrc = this.getAttribute('data-src');
+    const novelTitle = this.textContent;
+    if (audioPlayer) {
+      audioPlayer.pause();
+    }
+    audioPlayer = new Audio(audioSrc);
+    audioPlayer.play();
+    document.getElementById('currentNovel').textContent = novelTitle;
+    playPauseBtn.textContent = 'Pause';  // Update button text to 'Pause' when playing
+  });
+});
+
+playPauseBtn.addEventListener('click', function() {
+  if (audioPlayer) {
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+      playPauseBtn.textContent = 'Pause';
+    } else {
+      audioPlayer.pause();
+      playPauseBtn.textContent = 'Play';
+    }
+  }
+});
+
+recordBtn.addEventListener('click', function() {
+  if (!isRecording) {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.start();
+          isRecording = true;
+          recordBtn.textContent = 'Stop Recording';
+
+          mediaRecorder.ondataavailable = function(e) {
+            chunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = function() {
+            const blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+            const audioURL = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = audioURL;
+            link.download = 'recorded_audio.ogg';
+            link.click();
+            chunks = [];
+          };
+        })
+        .catch(function(err) {
+          console.error('Error accessing microphone:', err);
+        });
+    } else {
+      console.error('getUserMedia not supported on your browser!');
+    }
+  } else {
+    mediaRecorder.stop();
+    isRecording = false;
+    recordBtn.textContent = 'Record';
+  }
+});
+</script>
+</body>
+</html>
